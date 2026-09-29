@@ -1,0 +1,24 @@
+[tool.isort]
+profile = "black"
+forced_separate = ["tests"]
+line_length = 100
+skip_gitignore = true # align tool behavior with Black
+extend_skip=[
+    # Correctly ordering the imports in serverless functions would
+    # require a pyproject.toml in every function; don't bother with it for now.
+    "serverless",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[dependency-groups]
+dev = [
+    "cvat-cli>=2.76.0",
+    "datumaro>=1.13.11",
+    "open3d>=0.20.0",
+    "pillow>=12.3.0",
+    "pypcd4>=1.5.0",
+    "tensorboardx>=2.6.5",
+]
