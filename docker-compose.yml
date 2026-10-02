@@ -251,6 +251,17 @@ services:
   cvat_ui:
     container_name: cvat_ui
     image: cvat/ui:${CVAT_VERSION:-dev}
+    # Build the UI from this checkout when `docker compose up -d` is used.
+    # pull_policy=build prevents a stale cvat/ui:dev image from hiding source changes.
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+      args:
+        http_proxy:
+        https_proxy:
+        no_proxy:
+        socks_proxy:
+    pull_policy: build
     restart: always
     depends_on:
       - cvat_server
